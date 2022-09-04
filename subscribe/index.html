@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./redux.js"></script>
-  <title>Redux - Action</title>
+  <title>Redux - Subscribe</title>
 </head>
 
 <body>
 
   <div>
-    <div class="resultado">0</div>
+    <h1 class="resultado">Total: <span id="total">0</span></h1>
     <button class="btn">Incrementar</button>
   </div>
 
@@ -29,7 +29,7 @@
       return { type: INCREMENTAR }
     }
 
-    const initialState = 0
+    const initialState = 1
     function reducer(state = initialState, action) {
       if (action.type === INCREMENTAR) {
         return state + 1
@@ -44,12 +44,18 @@
     const store = Redux.createStore(reducer)
     let state = store.getState();
 
-    store.dispatch(somar(10))
     store.dispatch(incrementar())
-    state = store.getState();
-    console.log(state)
 
-    const resultado = document.querySelector('.resultado').innerHTML = store.getState()
+    function render() {
+      const state = store.getState();
+      const total = document.querySelector('#total')
+      total.innerHTML = state
+    }
+
+    const unsubscribe = store.subscribe(render)
+    // unsubscribe()
+
+    const btn = document.querySelector('.btn')
     btn.addEventListener('click', () => store.dispatch(incrementar()))
 
 
