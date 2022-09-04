@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./redux.js"></script>
+  <title>Redux - Action</title>
+</head>
+
+<body>
+
+  <div>
+    <div class="resultado">0</div>
+    <button class="btn">Incrementar</button>
+  </div>
+
+  <script>
+    // Constantes
+    const INCREMENTAR = 'incrementar';
+    const SOMAR = 'somar';
+
+    // Actions create
+    function somar(payload) {
+      return { type: SOMAR, payload }
+    }
+    function incrementar(payload) {
+      return { type: INCREMENTAR }
+    }
+
+    const initialState = 0
+    function reducer(state = initialState, action) {
+      if (action.type === INCREMENTAR) {
+        return state + 1
+      }
+      if (action.type === 'somar') {
+        return state + action.payload
+      }
+      return state
+    }
+
+    // Criar o store
+    const store = Redux.createStore(reducer)
+    let state = store.getState();
+
+    store.dispatch(somar(10))
+    store.dispatch(incrementar())
+    state = store.getState();
+    console.log(state)
+
+    const resultado = document.querySelector('.resultado').innerHTML = store.getState()
+    btn.addEventListener('click', () => store.dispatch(incrementar()))
+
+
+  </script>
+</body>
+
+</html>
