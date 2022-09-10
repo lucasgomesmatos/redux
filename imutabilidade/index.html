@@ -5,11 +5,39 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./redux.js"></script>
   <title>Redux - Imutabilidade</title>
 </head>
 
 <body>
-  <script src="./redux.js"></script>
+  <script>
+
+    const initialState = {
+      nome: "Lucas",
+      idade: 23
+    }
+
+    function reducer(state = initialState, action) {
+      switch (action.type) {
+        case "MUDAR_NOME":
+          state.nome = action.payload
+          return state;
+        default:
+          return state;
+      }
+    }
+
+    const store = Redux.createStore(
+      reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    );
+
+    store.dispatch({ type: "MUDAR_NOME", payload: "Maria" })
+    store.dispatch({ type: "MUDAR_NOME", payload: "João" })
+    store.dispatch({ type: "MUDAR_NOME", payload: "Pedro" })
+
+  </script>
+
 </body>
 
 </html>
