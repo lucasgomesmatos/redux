@@ -12,6 +12,22 @@
 <body>
   <script>
 
+    const array1 = [0, 1, 2, 3, 4];
+    const array2 = [...array1];
+
+    console.log(array2 === array1)
+
+    const obj1 = {
+      nome: "Lucas",
+      idade: 23
+    }
+
+    const obj2 = Object.assign({}, obj1, { nome: "Maria" })
+
+    console.log(obj1 === obj2)
+    console.log(obj1)
+    console.log(obj2)
+
     const initialState = {
       nome: "Lucas",
       idade: 23
@@ -20,8 +36,8 @@
     function reducer(state = initialState, action) {
       switch (action.type) {
         case "MUDAR_NOME":
-          state.nome = action.payload
-          return state;
+          // state.nome = action.payload
+          return { ...state, nome: action.payload };
         default:
           return state;
       }
