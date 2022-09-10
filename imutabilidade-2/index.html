@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./immer.js"></script>
+  <script src="./redux.js"></script>
+  <title>Redux - Imutabilidade 2</title>
+</head>
+
+<body>
+  <script>
+
+    // const array1 = [0, 1, 2, 3, 4];
+    // const array2 = [...array1];
+
+    // console.log(array2 === array1)
+
+    const obj1 = {
+      nome: "Lucas",
+      idade: 23
+    }
+
+    const obj2 = immer.produce(obj1, (draft) => {
+      draft.idade = 35;
+    })
+
+    // const obj2 = Object.assign({}, obj1, { nome: "Maria" })
+
+    // console.log(obj1 === obj2)
+    // console.log(obj1)
+    // console.log(obj2)
+
+    const initialState = {
+      nome: "Lucas",
+      idade: 23
+    }
+
+
+
+    const reducer = immer.produce((state, action) => {
+      switch (action.type) {
+        case "MUDAR_NOME":
+          state.nome = action.payload;
+          break;
+        case "MUDAR_IDADE":
+          state.idade = action.payload
+          break;
+      }
+    }, initialState)
+
+    const store = Redux.createStore(
+      reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    );
+
+    store.dispatch({ type: "MUDAR_NOME", payload: "Maria" })
+    store.dispatch({ type: "MUDAR_NOME", payload: "João" })
+    store.dispatch({ type: "MUDAR_NOME", payload: "Pedro" })
+    store.dispatch({ type: "MUDAR_IDADE", payload: 20 })
+    store.dispatch({ type: "MUDAR_IDADE", payload: 24 })
+
+  </script>
+
+</body>
+
+</html>
