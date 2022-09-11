@@ -18,40 +18,46 @@
 
   <script>
     // Constantes
-    const INCREMENTAR = 'incrementar';
-    const SOMAR = 'somar';
+    const SOMAR = "SOMAR";
+    const INCREMENTAR = "INCREMENTAR";
+    const initialState = 10;
 
-    // Actions create
+    // Action Creator
     function somar(payload) {
       return { type: SOMAR, payload }
     }
-    function incrementar(payload) {
+
+    function incrementar() {
       return { type: INCREMENTAR }
     }
 
-    const initialState = 0
+    // função responsável por retornar o estado atual da store
     function reducer(state = initialState, action) {
-      if (action.type === INCREMENTAR) {
-        return state + 1
+      switch (action.type) {
+        case SOMAR:
+          return state + action.payload;
+        case INCREMENTAR:
+          return state + 1;
+        default:
+          return state;
       }
-      if (action.type === 'somar') {
-        return state + action.payload
-      }
-      return state
     }
 
-    // Criar o store
-    const store = Redux.createStore(reducer)
+    const store = Redux.createStore(reducer);
+
     let state = store.getState();
+    console.log(state); // 10
 
-    store.dispatch(somar(10))
-    store.dispatch(incrementar())
+
+    // Enviar um objeto com type e payload para o reducer
+    store.dispatch(somar(10));
+    store.dispatch(incrementar());
+
     state = store.getState();
-    console.log(state)
+    console.log(state); // 36
 
-    const resultado = document.querySelector('.resultado').innerHTML = store.getState()
-    btn.addEventListener('click', () => store.dispatch(incrementar()))
-
+    const button = document.querySelector('.btn');
+    button.addEventListener('click', () => store.dispatch(incrementar()));
 
   </script>
 </body>
