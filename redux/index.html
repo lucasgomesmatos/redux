@@ -11,20 +11,39 @@
 
 <body>
   <script>
+
+    // estado inicial
     const initialState = {
       nome: 'Lucas',
       id: 199
 
     }
 
+    // função que retorna o estado atual da store
     function reducer(state = initialState, action) {
       return state
     }
 
+    // Dá acesso ao estado global, (assim podemos modificar o mesmo)
     const store = Redux.createStore(reducer)
 
+    // método responsável por retorna o estado atual da store
     const state = store.getState()
-    console.log(state.nome)
+    console.log(state.nome);
+
+
+    /* A função de reducer recebe dois argumentos principais, o primeiro sendo
+    * o estado atual (state) e o segundo uma ação (action) que será utilizado 
+      * para identificamos as ações despachadas pela store
+      */
+
+    function reducer2(state = 10, action) {
+      return state;
+    }
+
+    const store2 = Redux.createStore(reducer2);
+    const state2 = store2.getState(); // 10
+    console.log(state2)
   </script>
 </body>
 
