@@ -12,52 +12,51 @@
 <body>
 
   <div>
-    <h1 class="resultado">Total: <span id="total">0</span></h1>
+    <h1>Total: <span id="total">0</span></h1>
     <button class="btn">Incrementar</button>
+    <button class="btn-somar">somar</button>
   </div>
 
   <script>
-    // Constantes
-    const INCREMENTAR = 'incrementar';
-    const SOMAR = 'somar';
+    const INCREMENTAR = "incrementar";
+    const SOMAR = "somar";
 
-    // Actions create
-    function somar(payload) {
-      return { type: SOMAR, payload }
-    }
-    function incrementar(payload) {
+    function incrementar() {
       return { type: INCREMENTAR }
     }
 
-    const initialState = 1
-    function reducer(state = initialState, action) {
-      if (action.type === INCREMENTAR) {
-        return state + 1
-      }
-      if (action.type === 'somar') {
-        return state + action.payload
-      }
-      return state
+    function somar(payload) {
+      return { type: SOMAR, payload }
     }
 
-    // Criar o store
-    const store = Redux.createStore(reducer)
-    let state = store.getState();
+    const initialState = 0;
 
-    store.dispatch(incrementar())
+    function reducer(state = initialState, action) {
+      switch (action.type) {
+        case INCREMENTAR:
+          return state + 1;
+        case SOMAR:
+          return state + action.payload
+        default:
+          return state;
+      }
+    }
+
+    const store = Redux.createStore(reducer);
 
     function render() {
-      const state = store.getState();
-      const total = document.querySelector('#total')
-      total.innerHTML = state
+      let state = store.getState();
+      const total = document.getElementById('total');
+      total.innerHTML = state;
     }
 
-    const unsubscribe = store.subscribe(render)
-    // unsubscribe()
+    store.subscribe(render)
 
-    const btn = document.querySelector('.btn')
-    btn.addEventListener('click', () => store.dispatch(incrementar()))
+    const btn = document.querySelector('.btn');
+    btn.addEventListener('click', () => store.dispatch(incrementar()));
 
+    const btnSomar = document.querySelector('.btn-somar');
+    btnSomar.addEventListener('click', () => store.dispatch(somar(10)));
 
   </script>
 </body>
