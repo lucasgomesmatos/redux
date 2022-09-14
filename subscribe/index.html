@@ -18,9 +18,11 @@
   </div>
 
   <script>
+    // Constantes
     const INCREMENTAR = "incrementar";
     const SOMAR = "somar";
 
+    // Action creator
     function incrementar() {
       return { type: INCREMENTAR }
     }
@@ -31,6 +33,7 @@
 
     const initialState = 0;
 
+    // retorna o estado atual da store
     function reducer(state = initialState, action) {
       switch (action.type) {
         case INCREMENTAR:
@@ -42,15 +45,19 @@
       }
     }
 
+    // Cria uma nova Store
     const store = Redux.createStore(reducer);
 
+    // renderiza o estado atualizado
     function render() {
       let state = store.getState();
       const total = document.getElementById('total');
       total.innerHTML = state;
     }
+    // É ativada quando mudar o estado
+    const unsubscribe = store.subscribe(render)
 
-    store.subscribe(render)
+    // unsubscribe(); desativa a função subscribe
 
     const btn = document.querySelector('.btn');
     btn.addEventListener('click', () => store.dispatch(incrementar()));
