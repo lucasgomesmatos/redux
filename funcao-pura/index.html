@@ -1,43 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./redux.js"></script>
-  <title>Redux - Imutabilidade</title>
+  <title>Redux - Função Pura</title>
 </head>
 
 <body>
+  <div class="caixa" style="background: tomato; height: 50px;"></div>
+
   <script>
 
-    const array1 = [0, 1, 2, 3, 4];
-    const array2 = [...array1];
 
-    console.log(array2 === array1)
 
-    const obj1 = {
-      nome: "Lucas",
-      idade: 23
+    const WIDTH = "WIDTH";
+
+    function aumentarWidth(payload) {
+      return { type: WIDTH, payload }
     }
 
-    const obj2 = Object.assign({}, obj1, { nome: "Maria" })
-
-    console.log(obj1 === obj2)
-    console.log(obj1)
-    console.log(obj2)
-
-    const initialState = {
-      nome: "Lucas",
-      idade: 23
-    }
+    const initialState = 0;
 
     function reducer(state = initialState, action) {
       switch (action.type) {
-        case "MUDAR_NOME":
-          // state.nome = action.payload
-          return { ...state, nome: action.payload };
+        case WIDTH:
+          return action.payload;
         default:
           return state;
       }
@@ -48,9 +38,16 @@
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     );
 
-    store.dispatch({ type: "MUDAR_NOME", payload: "Maria" })
-    store.dispatch({ type: "MUDAR_NOME", payload: "João" })
-    store.dispatch({ type: "MUDAR_NOME", payload: "Pedro" })
+    function reder(largura) {
+      const caixa = document.querySelector('.caixa');
+      caixa.style.width = store.getState() + "px";
+    }
+
+    store.subscribe(reder)
+    store.dispatch(aumentarWidth(150));
+    store.dispatch(aumentarWidth(100));
+
+
 
   </script>
 
