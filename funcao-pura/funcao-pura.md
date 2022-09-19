@@ -118,3 +118,4 @@ store.subscribe(render);
 store.dispatch({ type: 'MODIFICAR_WIDTH', payload: 100 });
 store.dispatch({ type: 'MODIFICAR_WIDTH', payload: 200 });
 store.dispatch({ type: 'MODIFICAR_WIDTH', payload: 300 });
+'
