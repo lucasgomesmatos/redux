@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
@@ -12,31 +12,17 @@
 <body>
   <script>
 
-    const array1 = [0, 1, 2, 3, 4];
-    const array2 = [...array1];
-
-    console.log(array2 === array1)
-
-    const obj1 = {
-      nome: "Lucas",
-      idade: 23
-    }
-
-    const obj2 = Object.assign({}, obj1, { nome: "Maria" })
-
-    console.log(obj1 === obj2)
-    console.log(obj1)
-    console.log(obj2)
-
     const initialState = {
       nome: "Lucas",
       idade: 23
-    }
+    };
+
+    const MUDAR_NOME = "MUDAR_NOME"
+
 
     function reducer(state = initialState, action) {
       switch (action.type) {
-        case "MUDAR_NOME":
-          // state.nome = action.payload
+        case MUDAR_NOME:
           return { ...state, nome: action.payload };
         default:
           return state;
@@ -48,9 +34,11 @@
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     );
 
-    store.dispatch({ type: "MUDAR_NOME", payload: "Maria" })
-    store.dispatch({ type: "MUDAR_NOME", payload: "João" })
-    store.dispatch({ type: "MUDAR_NOME", payload: "Pedro" })
+    store.dispatch({ type: MUDAR_NOME, payload: "Maria" })
+    store.dispatch({ type: MUDAR_NOME, payload: "João" })
+    store.dispatch({ type: MUDAR_NOME, payload: "Pedro" })
+
+
 
   </script>
 
