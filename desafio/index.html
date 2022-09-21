@@ -7,20 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./immer.js"></script>
   <script src="./redux.js"></script>
-  <title>Redux - Imutabilidade 2</title>
+  <title>Desafio</title>
 </head>
 
 <body>
-
   <script type="module">
     import store from "./store/configureStore.js";
-    import { incrementar } from "./store/contador.js";
+    import { completar_aula } from "./store/aula.js";
+    import { incrementar_tempo } from "./store/aluno.js";
 
     store.subscribe(() => {
-      console.log("funcionou");
+      console.log(store.getState());
     })
 
-    store.dispatch(incrementar());
+    store.dispatch(completar_aula(1));
+    store.dispatch(completar_aula(2));
+    store.dispatch(completar_aula(3));
+    store.dispatch(incrementar_tempo());
   </script>
 </body>
 
