@@ -8,9 +8,9 @@ const MODIFICAR_EMAIL = 'aluno/MODIFICAR_EMAIL';
 
 export const incrementar_tempo = () => ({ type: INCREMENTAR_TEMPO });
 export const reduzir_tempo = () => ({ type: REDUZIR_TEMPO });
-export const modificar_email = (payload) => ({
+export const modificar_email = (email) => ({
   type: MODIFICAR_EMAIL,
-  payload,
+  payload: email,
 });
 
 const initialState = {
