@@ -13,40 +13,29 @@
 <body>
   <script>
 
-    // const array1 = [0, 1, 2, 3, 4];
-    // const array2 = [...array1];
-
-    // console.log(array2 === array1)
-
-    const obj1 = {
-      nome: "Lucas",
-      idade: 23
-    }
-
-    const obj2 = immer.produce(obj1, (draft) => {
-      draft.idade = 35;
-    })
-
-    // const obj2 = Object.assign({}, obj1, { nome: "Maria" })
-
-    // console.log(obj1 === obj2)
-    // console.log(obj1)
-    // console.log(obj2)
-
     const initialState = {
       nome: "Lucas",
       idade: 23
     }
 
+    function mudarNome(payload) {
+      return { type: MUDAR_NOME, payload }
+    }
+    function mudarIdade(payload) {
+      return { type: MUDAR_IDADE, payload }
+    }
 
+
+    const MUDAR_IDADE = "MUDAR_IDADE";
+    const MUDAR_NOME = "MUDAR_NOME";
 
     const reducer = immer.produce((state, action) => {
       switch (action.type) {
-        case "MUDAR_NOME":
-          state.nome = action.payload;
-          break;
-        case "MUDAR_IDADE":
+        case MUDAR_IDADE:
           state.idade = action.payload
+          break;
+        case MUDAR_NOME:
+          state.nome = action.payload
           break;
       }
     }, initialState)
@@ -56,11 +45,11 @@
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     );
 
-    store.dispatch({ type: "MUDAR_NOME", payload: "Maria" })
-    store.dispatch({ type: "MUDAR_NOME", payload: "João" })
-    store.dispatch({ type: "MUDAR_NOME", payload: "Pedro" })
-    store.dispatch({ type: "MUDAR_IDADE", payload: 20 })
-    store.dispatch({ type: "MUDAR_IDADE", payload: 24 })
+    store.dispatch(mudarNome("Maria"))
+    store.dispatch(mudarIdade(22))
+    console.log(store.getState())
+
+
 
   </script>
 
