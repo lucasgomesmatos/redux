@@ -26,7 +26,7 @@ const { applyMiddleware, compose } = Redux;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const enhancer = composeEnhancers(Redux.applyMiddleware(logger));
+const enhancer = composeEnhancers(applyMiddleware(logger));
 const store = Redux.createStore(reducer, enhancer);
 
 console.log(store.getState());
