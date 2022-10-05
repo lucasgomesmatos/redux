@@ -8,10 +8,10 @@ const initialState = {
   error: null,
 };
 
-function reducer(state = 0, action) {
+function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_STARTED:
-      return { loading: true };
+      return { ...state, loading: true };
     case FETCH_SUCCESS:
       return { data: action.payload, loading: false, error: null };
     case FETCH_ERROR:
