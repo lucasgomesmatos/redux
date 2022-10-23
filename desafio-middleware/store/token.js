@@ -1,3 +1,5 @@
+import getLocalStorage from './helper/getLocalStorage.js';
+
 const TOKEN_FETCH_STARTED = 'token/TOKEN_FETCH_STARTED';
 const TOKEN_FETCH_SUCCESS = 'token/TOKEN_FETCH_SUCCESS';
 const TOKEN_FETCH_ERROR = 'token/TOKEN_FETCH_ERROR';
@@ -33,7 +35,7 @@ export const tokenFetch = (user) => async (dispatch) => {
 
 const initialState = {
   loading: false,
-  data: null,
+  data: getLocalStorage('token', null),
   error: null,
 };
 
