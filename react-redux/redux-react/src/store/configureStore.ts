@@ -1,10 +1,12 @@
 import { Action, AnyAction, configureStore, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import stockReducer from "./stoke.store"
+import modalReducer from "./modal.store"
 
 const store = configureStore({
   reducer: {
-    stock: stockReducer
+    stock: stockReducer,
+    modal: modalReducer
   }
 })
 
