@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
+  },
+  "dependencies": {
+    "@types/redux-logger": "^3.0.9"
+  }
+}
