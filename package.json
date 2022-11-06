@@ -3,6 +3,7 @@
     "redux-logger": "^3.0.6"
   },
   "dependencies": {
-    "@types/redux-logger": "^3.0.9"
+    "@types/redux-logger": "^3.0.9",
+    "axios": "^1.1.3"
   }
 }
